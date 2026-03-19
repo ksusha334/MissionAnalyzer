@@ -17,6 +17,6 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame();
             frame.setVisible(true);
-        });
+        }); //rjgjghjjghjh
     }
 }
