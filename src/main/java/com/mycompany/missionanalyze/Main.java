@@ -14,9 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Запускаем программу в потоке обработки событий
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            MainFrame frame = new MainFrame();
-            frame.setVisible(true);
-        }); //rjgjghjjghjh
+        MainFrame frame = new MainFrame();
+        frame.setVisible(true); //rjgjghjjghjh
     }
 }
