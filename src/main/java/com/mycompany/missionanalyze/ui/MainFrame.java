@@ -63,7 +63,6 @@ public class MainFrame extends JFrame{
                     "Ошибка при загрузке файла: " + e.getMessage(), 
                     "Ошибка", 
                     JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
             }
         }
     } 
