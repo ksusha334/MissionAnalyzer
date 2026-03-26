@@ -33,18 +33,15 @@ public class TextParser implements MissionParser{
             String key = parts[0].trim();
             String value = parts[1].trim();
             
-            // Простые поля
             if (key.equals("missionId")) mission.setMissionId(value);
             else if (key.equals("date")) mission.setDate(value);
             else if (key.equals("location")) mission.setLocation(value);
             else if (key.equals("outcome")) mission.setOutcome(value);
             else if (key.equals("damageCost")) mission.setDamageCost(Long.parseLong(value));
             
-            // Проклятие
             else if (key.equals("curse.name")) curse.setName(value);
             else if (key.equals("curse.threatLevel")) curse.setThreatLevel(value);
             
-            // Сорсеры
             else if (key.startsWith("sorcerer[") && key.endsWith(".name")) {
                 int index = Integer.parseInt(key.substring(9, key.indexOf("]")));
                 while (sorcerers.size() <= index) sorcerers.add(new Sorcerer());
@@ -56,7 +53,6 @@ public class TextParser implements MissionParser{
                 sorcerers.get(index).setRank(value);
             }
             
-            // Техники
             else if (key.startsWith("technique[") && key.endsWith(".name")) {
                 int index = Integer.parseInt(key.substring(10, key.indexOf("]")));
                 while (techniques.size() <= index) techniques.add(new Technique());

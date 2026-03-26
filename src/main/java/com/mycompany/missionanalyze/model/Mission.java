@@ -4,12 +4,15 @@
  */
 package com.mycompany.missionanalyze.model;
 
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
  *
  * @author march
  */
+@XmlRootElement(name = "mission")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Mission {
     private String missionId;
     private String date;
@@ -17,11 +20,16 @@ public class Mission {
     private String outcome;
     private long damageCost;
     private Curse curse;
+    
+    @XmlElementWrapper(name = "sorcerers")
+    @XmlElement(name = "sorcerer")
     private List<Sorcerer> sorcerers;
+    
+    @XmlElementWrapper(name = "techniques")
+    @XmlElement(name = "technique")
     private List<Technique> techniques;
     private String comment;
     
-    // Геттеры и сеттеры
     public String getMissionId() { 
         return missionId; 
     }
@@ -100,7 +108,7 @@ public class Mission {
         
         if (curse != null) {
             sb.append("\n   ПРОКЛЯТИЕ \n");
-            sb.append("Имя: ").append(curse.getName()).append("\n");
+            sb.append("Название: ").append(curse.getName()).append("\n");
             sb.append("Уровень: ").append(curse.getThreatLevel()).append("\n");
         }
         
@@ -125,7 +133,6 @@ public class Mission {
     } else {
         sb.append("отсутствует\n");
     }
-        
         return sb.toString();
     }
 }

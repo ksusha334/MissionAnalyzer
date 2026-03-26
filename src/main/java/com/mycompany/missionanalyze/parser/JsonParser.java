@@ -22,7 +22,7 @@ public class JsonParser implements MissionParser{
     
     @Override
     public boolean canParse(String fileName) {
-        return fileName.toLowerCase().endsWith(".json");
+        return fileName.toLowerCase().endsWith(".json");  //перeводим в нижний регистр, чтобы точно избежать ошибок
     }
   
 }
