@@ -33,5 +33,5 @@ public class Curse {
     
     public void setThreatLevel(String level) { 
         this.threatLevel = level; 
-    } // ко
+    } 
 }

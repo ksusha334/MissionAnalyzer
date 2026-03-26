@@ -9,6 +9,8 @@ import com.mycompany.missionanalyze.parser.ParserFactory;
 import com.mycompany.missionanalyze.parser.MissionParser;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
@@ -26,19 +28,20 @@ public class MainFrame extends JFrame{
         setTitle("Анализатор миссий магов");
         setSize(700, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         
-        // Текстовая область для вывода
         textArea = new JTextArea();
         textArea.setEditable(false);
-        textArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
         JScrollPane scrollPane = new JScrollPane(textArea);
         add(scrollPane, BorderLayout.CENTER);
         
         // Кнопка
         JButton openButton = new JButton("Открыть файл миссии");
-        openButton.setFont(new Font("Arial", Font.PLAIN, 14));
-        openButton.addActionListener(e -> openFile());
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openFile();
+            }
+        });
         
         JPanel bottomPanel = new JPanel();
         bottomPanel.add(openButton);

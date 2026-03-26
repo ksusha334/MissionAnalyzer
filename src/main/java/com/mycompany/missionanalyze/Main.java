@@ -13,8 +13,7 @@ import com.mycompany.missionanalyze.ui.MainFrame;
 public class Main {
 
     public static void main(String[] args) {
-        // Запускаем программу в потоке обработки событий
         MainFrame frame = new MainFrame();
-        frame.setVisible(true); //rjgjghjjghjh
+        frame.setVisible(true);
     }
 }
