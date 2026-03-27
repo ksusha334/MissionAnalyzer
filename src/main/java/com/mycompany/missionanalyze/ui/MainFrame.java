@@ -34,7 +34,6 @@ public class MainFrame extends JFrame{
         JScrollPane scrollPane = new JScrollPane(textArea);
         add(scrollPane, BorderLayout.CENTER);
         
-        // Кнопка
         JButton openButton = new JButton("Открыть файл миссии");
         openButton.addActionListener(new ActionListener() {
             @Override
