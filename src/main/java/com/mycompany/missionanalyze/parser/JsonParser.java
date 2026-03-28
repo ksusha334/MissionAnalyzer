@@ -25,4 +25,4 @@ public class JsonParser implements MissionParser{
         return fileName.toLowerCase().endsWith(".json");  //перeводим в нижний регистр, чтобы точно избежать ошибок
     }
   
-}
+} 

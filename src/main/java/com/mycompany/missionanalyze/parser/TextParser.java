@@ -26,7 +26,7 @@ public class TextParser implements MissionParser{
         
         while ((line = reader.readLine()) != null) {
             if (line.trim().isEmpty()) continue;
-            
+       
             String[] parts = line.split(":", 2);
             if (parts.length < 2) continue;
             
@@ -43,7 +43,7 @@ public class TextParser implements MissionParser{
             else if (key.equals("curse.threatLevel")) curse.setThreatLevel(value);
             
             else if (key.startsWith("sorcerer[") && key.endsWith(".name")) {
-                int index = Integer.parseInt(key.substring(9, key.indexOf("]")));
+                int index = Integer.parseInt(key.substring(9, key.indexOf("]"))); 
                 while (sorcerers.size() <= index) sorcerers.add(new Sorcerer());
                 sorcerers.get(index).setName(value);
             }
