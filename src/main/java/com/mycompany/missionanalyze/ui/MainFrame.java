@@ -5,8 +5,14 @@
 package com.mycompany.missionanalyze.ui;
 
 import com.mycompany.missionanalyze.model.Mission;
+import com.mycompany.missionanalyze.parser.JsonParser;
 import com.mycompany.missionanalyze.parser.ParserFactory;
 import com.mycompany.missionanalyze.parser.MissionParser;
+import com.mycompany.missionanalyze.parser.ParserRegistry;
+import com.mycompany.missionanalyze.parser.TextParser;
+import com.mycompany.missionanalyze.parser.XmlParser;
+import com.mycompany.missionanalyze.report.ReportGenerator;
+import com.mycompany.missionanalyze.report.SimpleReportGenerator;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,10 +26,16 @@ import java.io.File;
 public class MainFrame extends JFrame{
     private JTextArea textArea;
     private JFileChooser fileChooser;
-    private ParserFactory parserFactory;
+    private ParserRegistry parserRegistry;
+    private ReportGenerator reportGenerator;
     
     public MainFrame() {
-        parserFactory = new ParserFactory();
+        parserRegistry = new ParserRegistry();
+        
+        parserRegistry.register(new JsonParser());
+        parserRegistry.register(new XmlParser());
+        parserRegistry.register(new TextParser());
+        reportGenerator = new SimpleReportGenerator();
         
         setTitle("Анализатор миссий магов");
         setSize(700, 600);
@@ -54,9 +66,10 @@ public class MainFrame extends JFrame{
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             try {
-                MissionParser parser = parserFactory.getParser(file.getName());
+                MissionParser parser = parserRegistry.getParser(file.getName());
                 Mission mission = parser.parse(file);
-                textArea.setText(mission.toString());
+                String report = reportGenerator.generate(mission);
+                textArea.setText(report);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, 
                     "Ошибка при загрузке файла: " + e.getMessage(), 

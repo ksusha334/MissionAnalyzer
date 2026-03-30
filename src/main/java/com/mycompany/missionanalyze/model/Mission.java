@@ -96,43 +96,47 @@ public class Mission {
         this.comment = comment;
     }
     
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n   МИССИЯ \n");
-        sb.append("ID: ").append(missionId).append("\n");
-        sb.append("Дата: ").append(date).append("\n");
-        sb.append("Место: ").append(location).append("\n");
-        sb.append("Результат: ").append(outcome).append("\n");
-        sb.append("Ущерб: ").append(damageCost).append("\n");
-        
-        if (curse != null) {
-            sb.append("\n   ПРОКЛЯТИЕ \n");
-            sb.append("Название: ").append(curse.getName()).append("\n");
-            sb.append("Уровень: ").append(curse.getThreatLevel()).append("\n");
-        }
-        
-        if (sorcerers != null && !sorcerers.isEmpty()) {
-            sb.append("\n   МАГИ \n");
-            for (Sorcerer s : sorcerers) {
-                sb.append("• ").append(s.getName()).append(" (").append(s.getRank()).append(")\n").append(s.getAge()).append(")\n");
-            }
-        }
-        
-        if (techniques != null && !techniques.isEmpty()) {
-            sb.append("\n   ТЕХНИКИ \n");
-            for (Technique t : techniques) {
-                sb.append("• ").append(t.getName()).append(" - ").append(t.getOwner())
-                  .append(" (урон: ").append(t.getDamage()).append(")\n");
-            }
-        }
-        
-        sb.append("\nКомментарий: ");
-        if (comment != null && !comment.trim().isEmpty()) {
-        sb.append(comment).append("\n");
-    } else {
-        sb.append("отсутствует\n");
+    public String getComment() {
+        return comment;
     }
-        return sb.toString();
-    }
+    
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("\n   МИССИЯ \n");
+//        sb.append("ID: ").append(missionId).append("\n");
+//        sb.append("Дата: ").append(date).append("\n");
+//        sb.append("Место: ").append(location).append("\n");
+//        sb.append("Результат: ").append(outcome).append("\n");
+//        sb.append("Ущерб: ").append(damageCost).append("\n");
+//        
+//        if (curse != null) {
+//            sb.append("\n   ПРОКЛЯТИЕ \n");
+//            sb.append("Название: ").append(curse.getName()).append("\n");
+//            sb.append("Уровень: ").append(curse.getThreatLevel()).append("\n");
+//        }
+//        
+//        if (sorcerers != null && !sorcerers.isEmpty()) {
+//            sb.append("\n   МАГИ \n");
+//            for (Sorcerer s : sorcerers) {
+//                sb.append("• ").append(s.getName()).append(" (").append(s.getRank()).append(")\n");
+//            }
+//        }
+//        
+//        if (techniques != null && !techniques.isEmpty()) {
+//            sb.append("\n   ТЕХНИКИ \n");
+//            for (Technique t : techniques) {
+//                sb.append("• ").append(t.getName()).append(" - ").append(t.getOwner())
+//                  .append(" (урон: ").append(t.getDamage()).append(")\n");
+//            }
+//        }
+//        
+//        sb.append("\nКомментарий: ");
+//        if (comment != null && !comment.trim().isEmpty()) {
+//        sb.append(comment).append("\n");
+//    } else {
+//        sb.append("отсутствует\n");
+//    }
+//        return sb.toString();
+//    }
 }
