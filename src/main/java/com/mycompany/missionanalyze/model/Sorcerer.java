@@ -11,12 +11,14 @@ package com.mycompany.missionanalyze.model;
 public class Sorcerer {
     private String name;
     private String rank;
+    private int age;
     
     public Sorcerer() {}
     
-    public Sorcerer(String name, String rank) {
+    public Sorcerer(String name, String rank, int age) {
         this.name = name;
         this.rank = rank;
+        this.age = age;
     }
     
     public String getName() { 
@@ -34,4 +36,13 @@ public class Sorcerer {
     public void setRank(String rank) { 
         this.rank = rank; 
     }
+    
+    public void setAge(int age) { 
+        this.age = age; 
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
 }

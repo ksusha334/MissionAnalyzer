@@ -53,6 +53,12 @@ public class TextParser implements MissionParser{
                 sorcerers.get(index).setRank(value);
             }
             
+            else if (key.startsWith("sorcerer[") && key.endsWith(".age")) {
+                int index = Integer.parseInt(key.substring(9, key.indexOf("]")));
+                while (sorcerers.size() <= index) sorcerers.add(new Sorcerer());
+                sorcerers.get(index).setAge(Integer.parseInt(value));
+            }
+            
             else if (key.startsWith("technique[") && key.endsWith(".name")) {
                 int index = Integer.parseInt(key.substring(10, key.indexOf("]")));
                 while (techniques.size() <= index) techniques.add(new Technique());

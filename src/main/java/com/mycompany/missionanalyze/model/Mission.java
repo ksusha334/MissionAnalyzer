@@ -115,7 +115,7 @@ public class Mission {
         if (sorcerers != null && !sorcerers.isEmpty()) {
             sb.append("\n   МАГИ \n");
             for (Sorcerer s : sorcerers) {
-                sb.append("• ").append(s.getName()).append(" (").append(s.getRank()).append(")\n");
+                sb.append("• ").append(s.getName()).append(" (").append(s.getRank()).append(")\n").append(s.getAge()).append(")\n");
             }
         }
         

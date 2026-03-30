@@ -9,6 +9,7 @@ curse.threatLevel: HIGH
 
 sorcerer[0].name: Итадори Юдзи
 sorcerer[0].rank: GRADE_1
+sorcerer[0].age: 25
 
 sorcerer[1].name: Фушигуро Мэгуми
 sorcerer[1].rank: GRADE_2
