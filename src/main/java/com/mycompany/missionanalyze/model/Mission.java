@@ -4,32 +4,28 @@
  */
 package com.mycompany.missionanalyze.model;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 /**
  *
  * @author march
  */
-@XmlRootElement(name = "mission")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Mission {
     private String missionId;
     private String date;
     private String location;
     private String outcome;
     private long damageCost;
+    private String comment;
     private Curse curse;
     
-    @XmlElementWrapper(name = "sorcerers")
-    @XmlElement(name = "sorcerer")
-    private List<Sorcerer> sorcerers;
+    private java.util.List<Sorcerer> sorcerers;
+    private java.util.List<Technique> techniques;
     
-    @XmlElementWrapper(name = "techniques")
-    @XmlElement(name = "technique")
-    private List<Technique> techniques;
-    private String comment;
-    
+    private Map<String, Object> extensions = new HashMap<>();
     public String getMissionId() { 
         return missionId; 
     }
@@ -100,43 +96,16 @@ public class Mission {
         return comment;
     }
     
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("\n   МИССИЯ \n");
-//        sb.append("ID: ").append(missionId).append("\n");
-//        sb.append("Дата: ").append(date).append("\n");
-//        sb.append("Место: ").append(location).append("\n");
-//        sb.append("Результат: ").append(outcome).append("\n");
-//        sb.append("Ущерб: ").append(damageCost).append("\n");
-//        
-//        if (curse != null) {
-//            sb.append("\n   ПРОКЛЯТИЕ \n");
-//            sb.append("Название: ").append(curse.getName()).append("\n");
-//            sb.append("Уровень: ").append(curse.getThreatLevel()).append("\n");
-//        }
-//        
-//        if (sorcerers != null && !sorcerers.isEmpty()) {
-//            sb.append("\n   МАГИ \n");
-//            for (Sorcerer s : sorcerers) {
-//                sb.append("• ").append(s.getName()).append(" (").append(s.getRank()).append(")\n");
-//            }
-//        }
-//        
-//        if (techniques != null && !techniques.isEmpty()) {
-//            sb.append("\n   ТЕХНИКИ \n");
-//            for (Technique t : techniques) {
-//                sb.append("• ").append(t.getName()).append(" - ").append(t.getOwner())
-//                  .append(" (урон: ").append(t.getDamage()).append(")\n");
-//            }
-//        }
-//        
-//        sb.append("\nКомментарий: ");
-//        if (comment != null && !comment.trim().isEmpty()) {
-//        sb.append(comment).append("\n");
-//    } else {
-//        sb.append("отсутствует\n");
-//    }
-//        return sb.toString();
-//    }
+    public Map<String, Object> getExtensions() {
+        return extensions;
+    }
+    
+    @JsonAnySetter
+    public void addExtension(String key, Object value) {
+        this.extensions.put(key, value);
+    }
+   
+    public void setExtensions(Map<String, Object> extensions) {
+        this.extensions = extensions;
+    }
 }

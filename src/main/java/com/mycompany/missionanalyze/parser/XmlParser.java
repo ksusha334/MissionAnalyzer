@@ -10,21 +10,20 @@ package com.mycompany.missionanalyze.parser;
 //import java.io.File;
 //import java.util.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.missionanalyze.model.Mission;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.File;
 
 /**
  *
  * @author march
  */
-public class XmlParser implements MissionParser{
+public class XmlParser extends BaseParser{
     @Override
-    public Mission parse(File file) throws Exception {
-        JAXBContext context = JAXBContext.newInstance(Mission.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (Mission) unmarshaller.unmarshal(file);
+    protected Mission doParse(File file) throws Exception {
+        ObjectMapper mapper = new XmlMapper();
+        return mapper.readValue(file, Mission.class);
     }
     
     @Override

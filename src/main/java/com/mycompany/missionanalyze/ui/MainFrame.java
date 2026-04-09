@@ -6,11 +6,14 @@ package com.mycompany.missionanalyze.ui;
 
 import com.mycompany.missionanalyze.model.Mission;
 import com.mycompany.missionanalyze.parser.JsonParser;
-import com.mycompany.missionanalyze.parser.ParserFactory;
+import com.mycompany.missionanalyze.parser.ParserRegistry;
 import com.mycompany.missionanalyze.parser.MissionParser;
 import com.mycompany.missionanalyze.parser.ParserRegistry;
 import com.mycompany.missionanalyze.parser.TextParser;
 import com.mycompany.missionanalyze.parser.XmlParser;
+import com.mycompany.missionanalyze.parser.YamlParser;
+import com.mycompany.missionanalyze.parser.NoNameParser;
+import com.mycompany.missionanalyze.report.DetailedReportGenerator;
 import com.mycompany.missionanalyze.report.ReportGenerator;
 import com.mycompany.missionanalyze.report.SimpleReportGenerator;
 import javax.swing.*;
@@ -27,7 +30,7 @@ public class MainFrame extends JFrame{
     private JTextArea textArea;
     private JFileChooser fileChooser;
     private ParserRegistry parserRegistry;
-    private ReportGenerator reportGenerator;
+    private JComboBox<String> reportSelector;
     
     public MainFrame() {
         parserRegistry = new ParserRegistry();
@@ -35,7 +38,8 @@ public class MainFrame extends JFrame{
         parserRegistry.register(new JsonParser());
         parserRegistry.register(new XmlParser());
         parserRegistry.register(new TextParser());
-        reportGenerator = new SimpleReportGenerator();
+        parserRegistry.register(new YamlParser());
+        parserRegistry.register(new NoNameParser());
         
         setTitle("Анализатор миссий магов");
         setSize(700, 600);
@@ -46,6 +50,8 @@ public class MainFrame extends JFrame{
         JScrollPane scrollPane = new JScrollPane(textArea);
         add(scrollPane, BorderLayout.CENTER);
         
+        JPanel topPanel = new JPanel();
+        
         JButton openButton = new JButton("Открыть файл миссии");
         openButton.addActionListener(new ActionListener() {
             @Override
@@ -53,6 +59,18 @@ public class MainFrame extends JFrame{
                 openFile();
             }
         });
+        
+        String[] reportTypes = {
+            "1. Базовый отчёт",
+            "2. Расширенный отчёт"
+        };
+        reportSelector = new JComboBox<String>(reportTypes);
+        
+        topPanel.add(openButton);
+        topPanel.add(new JLabel("    Тип отчёта: "));
+        topPanel.add(reportSelector);
+        
+        add(topPanel, BorderLayout.NORTH);
         
         JPanel bottomPanel = new JPanel();
         bottomPanel.add(openButton);
@@ -68,6 +86,7 @@ public class MainFrame extends JFrame{
             try {
                 MissionParser parser = parserRegistry.getParser(file.getName());
                 Mission mission = parser.parse(file);
+                ReportGenerator reportGenerator = createReportGenerator();
                 String report = reportGenerator.generate(mission);
                 textArea.setText(report);
             } catch (Exception e) {
@@ -77,5 +96,16 @@ public class MainFrame extends JFrame{
                     JOptionPane.ERROR_MESSAGE);
             }
         }
-    } 
+    }
+    private ReportGenerator createReportGenerator() {
+        int selectedIndex = reportSelector.getSelectedIndex();
+         switch (selectedIndex) {
+            case 0:
+                return new SimpleReportGenerator();
+            case 1:
+                return new DetailedReportGenerator();
+            default:
+                return new SimpleReportGenerator();
+        }
+    }
 }

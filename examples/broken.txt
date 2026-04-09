@@ -1,0 +1,4 @@
+missionId=M-999
+date=
+location=
+outcome=

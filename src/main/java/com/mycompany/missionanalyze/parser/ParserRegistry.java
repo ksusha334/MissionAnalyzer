@@ -15,7 +15,7 @@ public class ParserRegistry {
     private List<MissionParser> parsers;
     
     public ParserRegistry() {
-        this.parsers = new ArrayList<>();
+        this.parsers = new ArrayList<MissionParser>();
     }
     
     public void register(MissionParser parser) {
@@ -32,6 +32,6 @@ public class ParserRegistry {
     }
     
     public List<MissionParser> getRegisteredParsers() {
-        return new ArrayList<>(parsers);
+        return new ArrayList<MissionParser>(parsers);
     }
 }
