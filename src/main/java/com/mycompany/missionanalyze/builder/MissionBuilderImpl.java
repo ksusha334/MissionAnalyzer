@@ -141,4 +141,35 @@ public class MissionBuilderImpl implements MissionBuilder {
         return mission;
     }
     
+    public static MissionBuilder fromMission(Mission mission) {
+        MissionBuilder builder = new MissionBuilderImpl();
+        builder.setMissionId(mission.getMissionId());
+        builder.setDate(mission.getDate());
+        builder.setLocation(mission.getLocation());
+        builder.setOutcome(mission.getOutcome());
+        builder.setDamageCost(mission.getDamageCost());
+        builder.setComment(mission.getComment());
+        builder.setCurse(mission.getCurse());
+
+        if (mission.getSorcerers() != null) {
+            for (Sorcerer s : mission.getSorcerers()) {
+                builder.addSorcerer(s);
+            }
+        }
+
+        if (mission.getTechniques() != null) {
+            for (Technique t : mission.getTechniques()) {
+                builder.addTechnique(t);
+            }
+        }
+
+        if (mission.getExtensions() != null) {
+            for (Map.Entry<String, Object> entry : mission.getExtensions().entrySet()) {
+                builder.addExtension(entry.getKey(), entry.getValue());
+            }
+        }
+
+        return builder;
+    }
+    
 }

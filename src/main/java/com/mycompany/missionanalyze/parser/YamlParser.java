@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.missionanalyze.model.Mission;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.mycompany.missionanalyze.builder.MissionBuilderImpl;
 import java.io.File;
 
 /**
@@ -16,11 +17,12 @@ import java.io.File;
  */
 public class YamlParser extends BaseParser {
     
+    private ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+    
     @Override
-    public Mission doParse(File file) throws Exception {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapper.readValue(file, Mission.class);
+    protected Mission doParse(File file) throws Exception {
+        Mission tempMission = objectMapper.readValue(file, Mission.class);
+        return MissionBuilderImpl.fromMission(tempMission).build();
     }
     
     @Override

@@ -6,6 +6,7 @@ package com.mycompany.missionanalyze.parser;
 
 import com.mycompany.missionanalyze.model.Mission;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.missionanalyze.builder.MissionBuilderImpl;
 import java.io.File;
 
 /**
@@ -14,12 +15,13 @@ import java.io.File;
  */
 public class JsonParser extends BaseParser {
     
-     @Override
-    public Mission doParse(File file) throws Exception {
+    @Override
+    protected Mission doParse(File file) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(file, Mission.class);
+        Mission tempMission = mapper.readValue(file, Mission.class);
+        return MissionBuilderImpl.fromMission(tempMission).build();
     }
-    
+
     @Override
     public boolean canParse(String fileName) {
         return fileName.toLowerCase().endsWith(".json");  //перeводим в нижний регистр, чтобы точно избежать ошибок

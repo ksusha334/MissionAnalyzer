@@ -22,8 +22,8 @@ public class Mission {
     private String comment;
     private Curse curse;
     
-    private java.util.List<Sorcerer> sorcerers;
-    private java.util.List<Technique> techniques;
+    private List<Sorcerer> sorcerers;
+    private List<Technique> techniques;
     
     private Map<String, Object> extensions = new HashMap<>();
     public String getMissionId() { 
