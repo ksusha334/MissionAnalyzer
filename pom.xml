@@ -32,7 +32,7 @@
     </dependencies>
     
     <build>
-        <finalName>laba1</finalName>
+        <finalName>laba2</finalName>
         <plugins>
             <plugin>
             <groupId>org.apache.maven.plugins</groupId>
