@@ -12,6 +12,6 @@ import com.mycompany.missionanalyze.model.Mission;
 import java.io.File;
 
 public interface MissionParser {
-    Mission parse(File file) throws Exception; //для парсинга 
-    boolean canParse(String fileName);          //проверка на расширение
+    Mission parse(File file) throws Exception; 
+    boolean canParse(String fileName);          
 }

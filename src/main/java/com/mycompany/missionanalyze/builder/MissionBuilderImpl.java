@@ -141,7 +141,7 @@ public class MissionBuilderImpl implements MissionBuilder {
         return mission;
     }
     
-    public static MissionBuilder fromMission(Mission mission) {
+    public static MissionBuilder fromMission(Mission mission) { //для того, чтобы можно было парсить через билдер JSON, XML и YAML
         MissionBuilder builder = new MissionBuilderImpl();
         builder.setMissionId(mission.getMissionId());
         builder.setDate(mission.getDate());

@@ -44,7 +44,10 @@ public class TextParser extends BaseParser {
             else if (currentSection == null) {
                 String[] parts = line.split("=", 2);
                 if (parts.length == 2) {
-                    applyMainField(parts[0].trim(), parts[1].trim(), builder);
+                    applyMainField(
+                            parts[0].trim(), 
+                            parts[1].trim(), 
+                            builder);
                 }
             }
             else {
@@ -91,6 +94,8 @@ public class TextParser extends BaseParser {
                         name = value;
                     } else if (key.equals("threatLevel")) {
                         threatLevel = value;
+                    } else {
+                        builder.addExtension("curse." + key, value);
                     }
                 }
             }
@@ -112,11 +117,9 @@ public class TextParser extends BaseParser {
                         sorcerer.setName(value);
                     } else if (key.equals("rank")) {
                         sorcerer.setRank(value);
-                    } else if (key.equals("age")) {
-                        try {
-                            sorcerer.setAge(Integer.parseInt(value));
-                        } catch (NumberFormatException e) {
-                        }
+                    } else {
+                        int currentIndex = sorcerers.size();
+                        builder.addExtension("sorcerer_" + currentIndex + "." + key, value);
                     }
                 }
             }
@@ -140,6 +143,9 @@ public class TextParser extends BaseParser {
                             technique.setDamage(Long.parseLong(value));
                         } catch (NumberFormatException e) {
                         }
+                    } else {
+                        int currentIndex = techniques.size();
+                        builder.addExtension("technique_" + currentIndex + "." + key, value);
                     }
                 }
             }
